@@ -22,7 +22,7 @@
 #                      cluster set.
 #
 #      Cluster-File2:  This input file provides the associations between
-#                      the clusters and cluster members in the first
+#                      the clusters and cluster members in the second
 #                      cluster set.
 #
 #                      Each input file must have 1 or more records with
