@@ -1,4 +1,12 @@
 
+TAG: lib_py_cluster-1-0-2
+DATE: 08/02/2004
+STAFF: lec
+RELEASE: Prime-time
+CHANGES:
+1) missing system_docs in 1-0-1 tag.
+
+
 TAG: lib_py_cluster-1-0-0
 DATE: 10/02/2002
 STAFF: dbm
