@@ -5,3 +5,11 @@ STAFF: dbm
 RELEASE: Prime-time
 CHANGES:
 1) Initial version to have a HISTORY file.  This is our baseline.
+
+TAG: lib_py_cluster-1-0-1
+DATE: 12/05/2002
+STAFF: dbm
+RELEASE: Prime-time
+CHANGES:
+1) Modified the query for the 0:1 and 1:0 buckets so they do not contain
+   cluster IDs that are in the other buckets.

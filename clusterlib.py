@@ -104,11 +104,13 @@ def printSourceCounts():
     counts = db.sql(cmds,'auto')
     print "Source 1 records: %d" % counts[0][0]['']
     print "Source 2 records: %d" % counts[1][0]['']
+    sys.stdout.flush()
 
 def printLists():
     print clist1
     print clist2
     print
+    sys.stdout.flush()
 
 
 ###########################################################################
@@ -284,11 +286,11 @@ def get0to1(prefix):
     #
     res = db.sql("select s2.%s, s2.%s " % (set2_cid, set2_cmid) + \
                  "from %s s2 " % set2_table + \
-                 "where not exists " + \
-                     "(select s1.%s " % set1_cmid + \
-                      "from %s s1 " % set1_table + \
-                      "where s1.%s = s2.%s) " % (set1_cmid, set2_cmid) + \
-                      "order by s2.%s, s2.%s" % (set2_cid, set2_cmid),'auto')
+                 "where s2.%s not in " % (set2_cid) + \
+                     "(select s2.%s " % set2_cid + \
+                     "from %s s1, %s s2 " % (set1_table, set2_table) + \
+                     "where s1.%s = s2.%s) " % (set1_cmid, set2_cmid) + \
+                 "order by s2.%s, s2.%s" % (set2_cid, set2_cmid),'auto')
 
     #
     #  Create the bucket file write all the results to it.
@@ -327,11 +329,11 @@ def get1to0(prefix):
     #
     res = db.sql("select s1.%s, s1.%s " % (set1_cid, set1_cmid) + \
                  "from %s s1 " % set1_table + \
-                 "where not exists " + \
-                     "(select s2.%s " % set2_cmid + \
-                      "from %s s2 " % set2_table + \
-                      "where s2.%s = s1.%s) " % (set2_cmid, set1_cmid) + \
-                      "order by s1.%s, s1.%s" % (set1_cid, set1_cmid),'auto')
+                 "where s1.%s not in " % (set1_cid) + \
+                     "(select s1.%s " % set1_cid + \
+                     "from %s s1, %s s2 " % (set1_table, set2_table) + \
+                     "where s1.%s = s2.%s) " % (set1_cmid, set2_cmid) + \
+                 "order by s1.%s, s1.%s" % (set1_cid, set1_cmid),'auto')
 
     #
     #  Create the bucket file write all the results to it.
