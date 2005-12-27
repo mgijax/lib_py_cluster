@@ -1,3 +1,9 @@
+TAG: lib_py_cluster-tr7193-BP
+DATE: 12/27/2005
+STAFF: dbm
+RELEASE: Prime-time
+CHANGES:
+1) Branch point tag for Python 2.4.2 upgrade.
 
 TAG: lib_py_cluster-1-0-2
 DATE: 08/02/2004
