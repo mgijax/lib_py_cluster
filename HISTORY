@@ -1,3 +1,17 @@
+TAG: lib_py_cluster-3-4-2-0
+DATE: 01/12/2006
+STAFF: jsb
+RELEASE: beta
+CHANGES:
+1) merged tr7193 branch to trunk
+
+TAG: lib_py_cluster-tr7193-1
+DATE: 12/27/2005
+STAFF: dbm
+RELEASE: Prime-time
+CHANGES:
+1) Python 2.4.2 upgrade fixes.
+
 TAG: lib_py_cluster-tr7193-BP
 DATE: 12/27/2005
 STAFF: dbm
