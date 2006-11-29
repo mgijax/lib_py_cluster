@@ -149,7 +149,7 @@ def loadFileSource(file, tempno):
     #  Create a temp table to load the cluster set into.
     #
     create_stmt = "create table #cluster_set%d " % tempno + \
-                  "(cid varchar(30), cmid varchar(30))"
+                  "(cid varchar(100), cmid varchar(30))"
     db.sql(create_stmt,None)
 
     #
@@ -159,6 +159,9 @@ def loadFileSource(file, tempno):
     insert_stmt = "insert into #cluster_set%d " % tempno + \
                   "values ('%s', '%s')"
 
+    idx1_stmt = "create index idx1 on #cluster_set%d(cid) " % (tempno)
+    idx2_stmt = "create index idx2 on #cluster_set%d(cmid) " % (tempno)
+
     #
     #  Loop through each record in the input file and load the clusters.
     #
@@ -167,6 +170,14 @@ def loadFileSource(file, tempno):
         db.sql(insert_stmt % (cid, cmid), None)
 
     inFile.close()
+
+    #
+    #  Create indexes
+    #
+
+    db.sql(idx1_stmt, None)
+    db.sql(idx2_stmt, None)
+
     return 0
 
 
