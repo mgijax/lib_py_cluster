@@ -22,7 +22,7 @@
 #                      cluster set.
 #
 #      Cluster-File2:  This input file provides the associations between
-#                      the clusters and cluster members in the second
+#                      the clusters and cluster members in the first
 #                      cluster set.
 #
 #                      Each input file must have 1 or more records with
@@ -144,7 +144,7 @@ sys.exit(0)
 #  is prohibited without the prior express written permission of The Jackson 
 #  Laboratory.
 # 
-# Copyright 1996, 1999, 2002, 2005 by The Jackson Laboratory
+# Copyright © 1996, 1999, 2002 by The Jackson Laboratory
 # 
 # All Rights Reserved
 #

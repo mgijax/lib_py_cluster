@@ -71,6 +71,8 @@
 #  Date        SE   Change Description
 #  ----------  ---  -------------------------------------------------------
 #
+#  07/19/2016  sc   Convert to postgres
+#
 #  09/23/2002  DBM  Initial development
 #
 ###########################################################################
@@ -79,6 +81,11 @@ import sys
 import os
 import string
 import db
+
+db.setTrace(True)
+db.setAutoTranslate(False)
+db.setAutoTranslateBE(False)
+
 
 #
 #  Global Variables
@@ -148,19 +155,16 @@ def loadFileSource(file, tempno):
     #
     #  Create a temp table to load the cluster set into.
     #
-    create_stmt = "create table #cluster_set%d " % tempno + \
-                  "(cid varchar(100), cmid varchar(30))"
+    create_stmt = "create temporary table cluster_set%d " % tempno + \
+                  "(cid varchar(30), cmid varchar(30))"
     db.sql(create_stmt,None)
 
     #
     #  Build the SQL statement that will be used to insert the clusters
     #  into the temp table.
     #
-    insert_stmt = "insert into #cluster_set%d " % tempno + \
+    insert_stmt = "insert into cluster_set%d " % tempno + \
                   "values ('%s', '%s')"
-
-    idx1_stmt = "create index idx1 on #cluster_set%d(cid) " % (tempno)
-    idx2_stmt = "create index idx2 on #cluster_set%d(cmid) " % (tempno)
 
     #
     #  Loop through each record in the input file and load the clusters.
@@ -170,14 +174,6 @@ def loadFileSource(file, tempno):
         db.sql(insert_stmt % (cid, cmid), None)
 
     inFile.close()
-
-    #
-    #  Create indexes
-    #
-
-    db.sql(idx1_stmt, None)
-    db.sql(idx2_stmt, None)
-
     return 0
 
 
@@ -208,7 +204,7 @@ def getLists():
     #  Find all the clusters from each table that map to each other via
     #  their cluster members.
     #
-    map = db.sql("select distinct s1.%s 'cid1', s2.%s 'cid2' " % (set1_cid, set2_cid) + \
+    map = db.sql("select distinct s1.%s as cid1, s2.%s as cid2 " % (set1_cid, set2_cid) + \
                  "from %s s1, %s s2 " % (set1_table, set2_table) + \
                  "where s1.%s = s2.%s " % (set1_cmid, set2_cmid) + \
                  "order by s2.%s, s1.%s" % (set2_cid, set1_cid),'auto')
@@ -707,7 +703,7 @@ def bucketize(file1=None, table1=None, cid1=None, cmid1=None,
     if (file1 != None):
         tempno = tempno + 1
         if (loadFileSource(file1, tempno) == 0):
-            set1_table = "#cluster_set%d" % tempno
+            set1_table = "cluster_set%d" % tempno
             set1_cid = "cid"
             set1_cmid = "cmid"
         else:
@@ -729,7 +725,7 @@ def bucketize(file1=None, table1=None, cid1=None, cmid1=None,
     if (file2 != None):
         tempno = tempno + 1
         if (loadFileSource(file2, tempno) == 0):
-            set2_table = "#cluster_set%d" % tempno
+            set2_table = "cluster_set%d" % tempno
             set2_cid = "cid"
             set2_cmid = "cmid"
         else:
@@ -796,7 +792,7 @@ def bucketize(file1=None, table1=None, cid1=None, cmid1=None,
 #  is prohibited without the prior express written permission of The Jackson 
 #  Laboratory.
 # 
-# Copyright 1996, 1999, 2002, 2005 by The Jackson Laboratory
+# Copyright © 1996, 1999, 2002 by The Jackson Laboratory
 # 
 # All Rights Reserved
 #
