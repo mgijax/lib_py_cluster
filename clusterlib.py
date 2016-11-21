@@ -71,6 +71,8 @@
 #  Date        SE   Change Description
 #  ----------  ---  -------------------------------------------------------
 #
+# 11/21/2016   sc   remove setAutoTranslate*
+#
 #  07/19/2016  sc   Convert to postgres
 #
 #  09/23/2002  DBM  Initial development
@@ -83,9 +85,6 @@ import string
 import db
 
 db.setTrace(True)
-db.setAutoTranslate(False)
-db.setAutoTranslateBE(False)
-
 
 #
 #  Global Variables
