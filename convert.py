@@ -1,4 +1,3 @@
-#!/usr/local/bin/python
 #
 #  convert.py
 ###########################################################################
@@ -105,21 +104,21 @@ if (len(sys.argv) == 4):
     outputfile = sys.argv[2]
     delimiter = sys.argv[3]
 else:
-    print usage
+    print(usage)
     sys.exit(1)
 
 #
 #  Make sure the input file exists.
 #
 if (not os.path.exists(inputfile)):
-    print "Input file does not exist: %s" % inputfile
+    print("Input file does not exist: %s" % inputfile)
     sys.exit(1)
 
 #
 #  Make sure the output file does not already exists.
 #
 if (os.path.exists(outputfile)):
-    print "Output file already exists: %s" % outputfile
+    print("Output file already exists: %s" % outputfile)
     sys.exit(1)
 
 #
@@ -169,10 +168,10 @@ for line in inFile.readlines():
     #
     pos = regex.search(delimiter,list)
     while (pos >= 0):
-        outFile.write(cid + "	" + string.strip(list[:pos]) + "\n")
+        outFile.write(cid + "	" + str.strip(list[:pos]) + "\n")
         list = list[pos+1:]
         pos = regex.search(delimiter,list)
-    outFile.write(cid + "	" + string.strip(list) + "\n")
+    outFile.write(cid + "	" + str.strip(list) + "\n")
 
 #
 #  Close the input and output files.

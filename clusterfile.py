@@ -1,4 +1,3 @@
-#!/usr/local/bin/python
 #
 #  clusterfile.py
 ###########################################################################
@@ -105,7 +104,7 @@ if (len(sys.argv) == 4):
     clusterfile2 = sys.argv[2]
     bucketprefix = sys.argv[3]
 else:
-    print usage
+    print (usage)
     sys.exit(1);
 
 #

@@ -1,4 +1,3 @@
-#  clusterlib.py
 ###########################################################################
 #
 #  Purpose:  This module provides the functionality needed to compare 2 sets
@@ -108,14 +107,14 @@ def printSourceCounts():
     cmds.append("select count(*) from %s" % set1_table)
     cmds.append("select count(*) from %s" % set2_table)
     counts = db.sql(cmds,'auto')
-    print "Source 1 records: %d" % counts[0][0]['']
-    print "Source 2 records: %d" % counts[1][0]['']
+    print ("Source 1 records: %d" % counts[0][0][''])
+    print ("Source 2 records: %d" % counts[1][0][''])
     sys.stdout.flush()
 
 def printLists():
-    print clist1
-    print clist2
-    print
+    print (clist1)
+    print (clist2)
+    print ()
     sys.stdout.flush()
 
 
@@ -147,7 +146,7 @@ def loadFileSource(file, tempno):
     #  Make sure the input file exists and open it.
     #
     if (not os.path.exists(file)):
-        print "Input file does not exist: %s" % file
+        print ("Input file does not exist: %s" % file)
         return 1
     inFile = open(file, 'r')
 
@@ -169,7 +168,7 @@ def loadFileSource(file, tempno):
     #  Loop through each record in the input file and load the clusters.
     #
     for line in inFile.readlines():
-        [cid, cmid] = string.splitfields(line)
+        [cid, cmid] = str.splitfields(line)
         db.sql(insert_stmt % (cid, cmid), None)
 
     inFile.close()
@@ -668,31 +667,31 @@ def bucketize(file1=None, table1=None, cid1=None, cmid1=None,
     #  supplied for the second cluster set.
     #
     if (file1 == None) and (table1 == None):
-        print "No file or table was given for source 1"
+        print ("No file or table was given for source 1")
         return 1
 
     if (file1 != None) and (table1 != None):
-        print "A file and table were both given for source 1"
+        print ("A file and table were both given for source 1")
         return 1
 
     if (table1 != None) and (cid1 == None or cmid1 == None):
-        print "Cluster or cluster member column not specified for source 1"
+        print ("Cluster or cluster member column not specified for source 1")
         return 1
 
     if (file2 == None) and (table2 == None):
-        print "No file or table was given for source 2"
+        print ("No file or table was given for source 2")
         return 1
 
     if (file2 != None) and (table2 != None):
-        print "A file and table were both given for source 2"
+        print ("A file and table were both given for source 2")
         return 1
 
     if (table2 != None) and (cid2 == None or cmid2 == None):
-        print "Cluster or cluster member column not specified for source 2"
+        print ("Cluster or cluster member column not specified for source 2")
         return 1
 
     if (prefix == None):
-        print "Prefix for bucket files not specified"
+        print ("Prefix for bucket files not specified")
         return 1
 
     #
