@@ -77,7 +77,6 @@
 
 import sys
 import os
-import string
 import regex
 import regsub
 
