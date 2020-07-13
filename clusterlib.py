@@ -791,7 +791,7 @@ def bucketize(file1=None, table1=None, cid1=None, cmid1=None,
 #  is prohibited without the prior express written permission of The Jackson 
 #  Laboratory.
 # 
-# Copyright © 1996, 1999, 2002 by The Jackson Laboratory
+# Copyright 1996, 1999, 2002 by The Jackson Laboratory
 # 
 # All Rights Reserved
 #
