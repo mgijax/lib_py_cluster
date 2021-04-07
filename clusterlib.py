@@ -167,7 +167,7 @@ def loadFileSource(file, tempno):
     #  Loop through each record in the input file and load the clusters.
     #
     for line in inFile.readlines():
-        [cid, cmid] = str.splitfields(line)
+        [cid, cmid] = line[:-1].split('\t')
         db.sql(insert_stmt % (cid, cmid), None)
 
     inFile.close()
